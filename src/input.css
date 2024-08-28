@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body, 
+#app 
+{
+  @apply min-h-screen;
+}
+
+#nav > button {
+  @apply justify-center items-center flex;
+}
+
+#nav > button:not(:first-child) {
+  @apply ml-4;
+}
+
+#nav > button > span {
+  @apply inline-flex pl-2;
+}

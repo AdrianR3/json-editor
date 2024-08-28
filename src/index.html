@@ -8,20 +8,33 @@
   <title>JSON Editor</title>
   <!-- Page Styles -->
   <link href="./dist.css" rel="stylesheet">
+  <!-- Material Design Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <!-- CodeMirror -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/dracula.min.css">
 </head>
 <body>
-  <div class="bg-blue-600 text-white p-4">
-    <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
-      Button 1
-    </button>
-    <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded ml-4">
-      Button 2
-    </button>
+  <div id="app" class="flex flex-col">
+    <div id="nav" class="flex p-4 bg-blue-600 text-white">
+      <div class="text-xl font-bold p-2">
+        <span>Simple JSON Editor</span>
+      </div>
+      <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+        Minify
+        <span class="material-symbols-outlined">
+          close_fullscreen
+        </span>
+      </button>
+      <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+        Beautify
+        <span class="material-symbols-outlined">
+          data_object
+        </span>
+      </button>
+    </div>
+    <div id="editor" class="flex-1 bg-red-50"></div>
   </div>
-
-  <div id="editor" class="mt-4" style="height: calc(100vh - 72px);"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>

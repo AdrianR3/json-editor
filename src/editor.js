@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var editor = CodeMirror(document.getElementById('editor'), {
-    mode: 'javascript',
-    // theme: 'dracula',
+  let editor = CodeMirror(document.getElementById('editor'), {
+    mode: 'application/json',
+    theme: 'dracula',
     lineNumbers: true,
-    value: 'console.log("Hello, world!");'
+    value: `{"hello": "world"}`
   });
 });

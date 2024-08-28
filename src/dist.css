@@ -554,12 +554,16 @@ video {
   --tw-contain-style:  ;
 }
 
-.mt-4 {
-  margin-top: 1rem;
+.flex {
+  display: flex;
 }
 
-.ml-4 {
-  margin-left: 1rem;
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .rounded {
@@ -576,6 +580,15 @@ video {
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
 }
 
+.bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
 .p-4 {
   padding: 1rem;
 }
@@ -590,9 +603,9 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -604,12 +617,27 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.underline {
-  text-decoration-line: underline;
+body, 
+#app {
+  min-height: 100vh;
+}
+
+#nav > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav > button:not(:first-child) {
+  margin-left: 1rem;
+}
+
+#nav > button > span {
+  display: inline-flex;
+  padding-left: 0.5rem;
 }
 
 .hover\:bg-blue-900:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(30 58 138 / var(--tw-bg-opacity));
 }
-
