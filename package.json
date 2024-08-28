@@ -1,0 +1,25 @@
+{
+  "name": "json-editor",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Simple JSON editor",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/dist.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/dist.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdrianR3/json-editor.git"
+  },
+  "author": "AdrianR3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdrianR3/json-editor/issues"
+  },
+  "homepage": "https://github.com/AdrianR3/json-editor#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}

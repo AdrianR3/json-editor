@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Online JSON Editor">
+  <meta name="author" content="AdrianR3">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Editor</title>
+  <!-- Page Styles -->
+  <link href="./dist.css" rel="stylesheet">
+  <!-- CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
+</head>
+<body>
+  <div class="bg-blue-600 text-white p-4">
+    <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+      Button 1
+    </button>
+    <button class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded ml-4">
+      Button 2
+    </button>
+  </div>
+
+  <div id="editor" class="mt-4" style="height: calc(100vh - 72px);"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
+  <script src="./editor.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var editor = CodeMirror(document.getElementById('editor'), {
+        mode: 'javascript',
+        lineNumbers: true,
+        value: 'console.log("Hello, world!");'
+      });
+    });
+  </script>
+</body>
+</html>
