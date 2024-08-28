@@ -13,6 +13,9 @@
   <!-- CodeMirror -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/dracula.min.css">
+
+  <!-- CodeMirror Extensions -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/show-hint.min.css">
 </head>
 <body>
   <div id="app" class="flex flex-col">
@@ -20,25 +23,25 @@
       <div class="text-xl font-bold p-2">
         <span>Simple JSON Editor</span>
       </div>
-      <button class="nav-button blue" name="minify">
+      <button class="nav-button teal" name="minify">
         Minify
         <span class="material-symbols-outlined">
           close_fullscreen
         </span>
       </button>
-      <button class="nav-button blue" name="beautify">
+      <button class="nav-button yellow" name="beautify">
         Beautify
         <span class="material-symbols-outlined">
           data_object
         </span>
       </button>
-      <button class="nav-button blue" name="export">
+      <button class="nav-button red" name="export">
         Save
         <span class="material-symbols-outlined">
           download
         </span>
       </button>
-      <button class="nav-button blue" name="clear">
+      <button class="nav-button pink" name="clear">
         Clear
         <span class="material-symbols-outlined">
           refresh
@@ -50,6 +53,11 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
+
+  <!-- Extensions -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/edit/closebrackets.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/edit/matchbrackets.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/show-hint.js"></script>
   <script src="./editor.js"></script>
 </body>
 </html>

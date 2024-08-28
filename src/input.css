@@ -28,6 +28,46 @@ body,
   @apply bg-blue-800 hover:bg-blue-900 text-white;
 }
 
+.nav-button.red {
+  @apply bg-red-800 hover:bg-red-900 text-white;
+}
+
+.nav-button.green {
+  @apply bg-green-800 hover:bg-green-900 text-white;
+}
+
+.nav-button.yellow {
+  @apply bg-yellow-800 hover:bg-yellow-900 text-white;
+}
+
+.nav-button.purple {
+  @apply bg-purple-800 hover:bg-purple-900 text-white;
+}
+
+.nav-button.orange {
+  @apply bg-orange-800 hover:bg-orange-900 text-white;
+}
+
+.nav-button.pink {
+  @apply bg-pink-800 hover:bg-pink-900 text-white;
+}
+
+.nav-button.gray {
+  @apply bg-gray-800 hover:bg-gray-900 text-white;
+}
+
+.nav-button.teal {
+  @apply bg-teal-800 hover:bg-teal-900 text-white;
+}
+
+.nav-button.indigo {
+  @apply bg-indigo-800 hover:bg-indigo-900 text-white;
+}
+
+.nav-button.cyan {
+  @apply bg-cyan-800 hover:bg-cyan-900 text-white;
+}
+
 .nav-button:disabled {
   @apply bg-gray-700 hover:bg-gray-800 cursor-not-allowed;
 }

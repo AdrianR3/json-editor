@@ -1,10 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // var editor = CodeMirror(document.getElementById('editor'), {
+  //   mode: 'application/json',
+  //   theme: 'dracula',
+  //   lineNumbers: true,
+  //   value: `{"hello": "world"}`
+  // });
+
   var editor = CodeMirror(document.getElementById('editor'), {
     mode: 'application/json',
     theme: 'dracula',
     lineNumbers: true,
-    value: `{"hello": "world"}`
+    value: `{"hello": "world"}`,
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    extraKeys: {
+      "Space": "autocomplete"
+    }
   });
+
+  editor.setSize("100%", "90vh");
 
   console.log(editor.doc.getValue())
 
