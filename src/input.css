@@ -19,3 +19,15 @@ body,
 #nav > button > span {
   @apply inline-flex pl-2;
 }
+
+.nav-button {
+  @apply font-bold py-2 px-4 rounded;
+}
+
+.nav-button.blue {
+  @apply bg-blue-800 hover:bg-blue-900 text-white;
+}
+
+.nav-button:disabled {
+  @apply bg-gray-700 hover:bg-gray-800 cursor-not-allowed;
+}
