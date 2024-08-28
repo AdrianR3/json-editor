@@ -14,7 +14,28 @@ document.addEventListener('DOMContentLoaded', function () {
     switch (button) {
       case 'export': 
         
-        // Not Implemented Yet
+        let editorText = editor.doc.getValue().replace(/\n/g, "\r\n");
+        let textFileAsBlob = new Blob([editorText], {type:'application/json'});
+        
+        const now = new Date();
+        let fileName = `simple_json_${now.getUTCMonth()}_${now.getUTCDate()}_${now.getUTCFullYear()}.json`;
+        
+        let downloadLink = document.createElement("a");
+        downloadLink.download = fileName;
+        
+        window.URL = window.URL || window.webkitURL;
+        
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+
+        downloadLink.click();
+        
+        function destroyClickedElement(event) {
+          document.body.removeChild(event.target);
+        }
   
         break;
       case 'beautify':
@@ -26,7 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
         break;
       case 'minify':
 
-        // Not Implemented Yet
+        editor.doc.setValue(
+          JSON.stringify(JSON.parse(editor.doc.getValue()))
+        )
 
         break;
       case 'clear':
