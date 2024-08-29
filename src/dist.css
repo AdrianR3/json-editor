@@ -603,13 +603,27 @@ body,
   min-height: 100vh;
 }
 
+#editor {
+  overflow-y: hidden;
+}
+
+#editor > div {
+  /* @apply flex-1; */
+  /* position: relative; */
+  /* left: */
+  /* /* width: 100%; */
+  height: calc(100vh - 76px);
+  /* color: red; */
+}
+
 #nav > button {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#nav > button:not(:first-child) {
+#nav > button:not(:first-child), 
+#nav > select:not(:first-child) {
   margin-left: 1rem;
 }
 
@@ -625,6 +639,18 @@ body,
   padding-left: 1rem;
   padding-right: 1rem;
   font-weight: 700;
+}
+
+.nav-button.white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.nav-button.white:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 .nav-button.blue {

@@ -8,17 +8,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var editor = CodeMirror(document.getElementById('editor'), {
     mode: 'application/json',
-    theme: 'dracula',
+    theme: localStorage.getItem('theme') || '3024-night',
     lineNumbers: true,
-    value: `{"hello": "world"}`,
+    value: `{}`,
     autoCloseBrackets: true,
     matchBrackets: true,
     extraKeys: {
-      "Space": "autocomplete"
+      "F10": "autocomplete"
     }
   });
 
-  editor.setSize("100%", "90vh");
+  editor.setSize("100%", "100%");
 
   console.log(editor.doc.getValue())
 
@@ -71,5 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
         break;
     }
   }))
+
+  document.getElementById('themeSelector').addEventListener('change', (elm) => {
+    editor.setOption('theme', elm.target.value);
+    localStorage.setItem('theme', elm.target.value);
+  })
 
 });
