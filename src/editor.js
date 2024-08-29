@@ -1,11 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // var editor = CodeMirror(document.getElementById('editor'), {
-  //   mode: 'application/json',
-  //   theme: 'dracula',
-  //   lineNumbers: true,
-  //   value: `{"hello": "world"}`
-  // });
-
   var editor = CodeMirror(document.getElementById('editor'), {
     mode: 'application/json',
     theme: localStorage.getItem('theme') || '3024-night',
