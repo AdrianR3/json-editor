@@ -10,15 +10,14 @@ body,
 
 #editor {
   overflow-y: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 
 #editor > div {
-  /* @apply flex-1; */
-  /* position: relative; */
-  /* left: */
-  /* /* width: 100%; */
-  height: calc(100vh - 76px);
-  /* color: red; */
+  /* height: calc(100vh - 76px); */
+  flex-grow: 1;
 }
 
 #nav > button {
@@ -33,6 +32,10 @@ body,
 
 #nav > button > span {
   @apply inline-flex pl-2;
+}
+
+#nav > button:hover[name=export] > span {
+  @apply animate-bounce;
 }
 
 .nav-button {

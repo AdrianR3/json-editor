@@ -13,12 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
     value: `{}`,
     autoCloseBrackets: true,
     matchBrackets: true,
+    allowMultipleSelections: true,
     extraKeys: {
       "F10": "autocomplete"
     }
   });
 
-  editor.setSize("100%", "100%");
+  editor.setSize("100%");
 
   console.log(editor.doc.getValue())
 

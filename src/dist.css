@@ -554,6 +554,10 @@ video {
   --tw-contain-style:  ;
 }
 
+.float-end {
+  float: inline-end;
+}
+
 .flex {
   display: flex;
 }
@@ -566,6 +570,22 @@ video {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.content-end {
+  align-content: flex-end;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.gap-y-2 {
+  row-gap: 0.5rem;
+}
+
 .bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -574,6 +594,16 @@ video {
 .bg-red-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
+.bg-orange-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
+}
+
+.bg-orange-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(194 65 12 / var(--tw-bg-opacity));
 }
 
 .p-2 {
@@ -605,15 +635,13 @@ body,
 
 #editor {
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 #editor > div {
-  /* @apply flex-1; */
-  /* position: relative; */
-  /* left: */
-  /* /* width: 100%; */
-  height: calc(100vh - 76px);
-  /* color: red; */
+  /* height: calc(100vh - 76px); */
+  flex-grow: 1;
 }
 
 #nav > button {
@@ -630,6 +658,22 @@ body,
 #nav > button > span {
   display: inline-flex;
   padding-left: 0.5rem;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+#nav > button:hover[name=export] > span {
+  animation: bounce 1s infinite;
 }
 
 .nav-button {
