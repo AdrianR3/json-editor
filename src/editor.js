@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     matchBrackets: true,
     allowMultipleSelections: true,
     extraKeys: {
-      "F10": "autocomplete"
+      // "F10": "autocomplete"
     }
   });
 

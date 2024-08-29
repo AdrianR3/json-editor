@@ -39,7 +39,7 @@ body,
 }
 
 .nav-button {
-  @apply font-bold py-2 px-4 rounded;
+  @apply font-bold py-2 px-4 rounded transition-colors duration-200;
 }
 
 .nav-button.white {
@@ -47,49 +47,58 @@ body,
 }
 
 .nav-button.blue {
-  @apply bg-blue-800 hover:bg-blue-900 text-white;
+  @apply bg-blue-700 hover:bg-blue-500 text-white;
 }
 
 .nav-button.red {
-  @apply bg-red-800 hover:bg-red-900 text-white;
+  @apply bg-red-700 hover:bg-red-500 text-white;
 }
 
 .nav-button.green {
-  @apply bg-green-800 hover:bg-green-900 text-white;
+  @apply bg-green-700 hover:bg-green-500 text-white;
 }
 
 .nav-button.yellow {
-  @apply bg-yellow-800 hover:bg-yellow-900 text-white;
+  @apply bg-yellow-700 hover:bg-yellow-500 text-white;
 }
 
 .nav-button.purple {
-  @apply bg-purple-800 hover:bg-purple-900 text-white;
+  @apply bg-purple-700 hover:bg-purple-500 text-white;
 }
 
 .nav-button.orange {
-  @apply bg-orange-800 hover:bg-orange-900 text-white;
+  @apply bg-orange-700 hover:bg-orange-500 text-white;
 }
 
 .nav-button.pink {
-  @apply bg-pink-800 hover:bg-pink-900 text-white;
+  @apply bg-pink-700 hover:bg-pink-500 text-white;
 }
 
 .nav-button.gray {
-  @apply bg-gray-800 hover:bg-gray-900 text-white;
+  @apply bg-gray-700 hover:bg-gray-500 text-white;
 }
 
 .nav-button.teal {
-  @apply bg-teal-800 hover:bg-teal-900 text-white;
+  @apply bg-teal-700 hover:bg-teal-500 text-white;
 }
 
 .nav-button.indigo {
-  @apply bg-indigo-800 hover:bg-indigo-900 text-white;
+  @apply bg-indigo-700 hover:bg-indigo-500 text-white;
 }
 
 .nav-button.cyan {
-  @apply bg-cyan-800 hover:bg-cyan-900 text-white;
+  @apply bg-cyan-700 hover:bg-cyan-500 text-white;
 }
 
 .nav-button:disabled {
   @apply bg-gray-700 hover:bg-gray-800 cursor-not-allowed;
+}
+
+#app:has(#editor > div.CodeMirror.cm-s-3024-night) > #nav {
+  @apply bg-red-500;
+}
+
+#app:has(#editor > div.CodeMirror.cm-s-dracula) > #nav {
+  background-color: rgb(54, 54, 65);
+  /* background-color: rgb(50, 50, 69); */
 }
