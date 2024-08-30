@@ -30,7 +30,7 @@ body,
   @apply ml-4;
 }
 
-#nav > button > span {
+#nav > button:not(.no-text) > span {
   @apply inline-flex pl-2;
 }
 
@@ -38,12 +38,16 @@ body,
   @apply animate-bounce;
 }
 
+.separator {
+  @apply flex-1 invisible;
+}
+
 .nav-button {
   @apply font-bold py-2 px-4 rounded transition-colors duration-200;
 }
 
 .nav-button.white {
-  @apply bg-white hover:bg-gray-50 text-black;
+  @apply bg-white hover:bg-gray-100 text-black;
 }
 
 .nav-button.blue {
@@ -59,7 +63,7 @@ body,
 }
 
 .nav-button.yellow {
-  @apply bg-yellow-700 hover:bg-yellow-500 text-white;
+  @apply bg-yellow-500 hover:bg-yellow-600 text-white;
 }
 
 .nav-button.purple {
@@ -79,7 +83,7 @@ body,
 }
 
 .nav-button.teal {
-  @apply bg-teal-700 hover:bg-teal-500 text-white;
+  @apply bg-teal-500 hover:bg-teal-700 text-white;
 }
 
 .nav-button.indigo {

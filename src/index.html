@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/fold/foldgutter.css">
 
   <!-- All Themes -->
+  <link rel="stylesheet" href="./themes/high-contrast-light.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/3024-day.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/3024-night.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/abbott.css">
@@ -97,7 +99,7 @@
   <div id="app" class="flex flex-col">
     <div id="nav" class="flex flex-wrap p-4 gap-y-2 bg-orange-600 text-white">
       <div class="text-xl font-bold p-2">
-        <span>Simple JSON Editor</span>
+        <span>SimpleJSON Editor</span>
       </div>
       <button class="nav-button teal" name="minify">
         Minify
@@ -111,6 +113,13 @@
           data_object
         </span>
       </button>
+      <button class="nav-button indigo" name="validate">
+        Validate
+        <span class="material-symbols-outlined">
+          published_with_changes
+        </span>
+      </button>
+      <div class="separator"></div>
       <button class="nav-button green" name="export">
         Save
         <span class="material-symbols-outlined">
@@ -123,10 +132,10 @@
           refresh
         </span>
       </button>
-      <button class="nav-button indigo" name="validate">
-        Validate
+      <div class="separator"></div>
+      <button class="nav-button white no-text" name="settings">
         <span class="material-symbols-outlined">
-          published_with_changes
+          settings
         </span>
       </button>
       <select id="themeSelector" class="nav-button white">
@@ -136,6 +145,8 @@
         <option value="3024-night">3024-night</option>
         <option value="moxer">Moxer</option>
         <option value="neo">neo</option>
+
+        <option>high-contrast-light</option>
 
         <option value="" disabled>All Themes</option>
         
@@ -208,6 +219,16 @@
       </select>
     </div>
     <div id="editor" class="flex-1 bg-red-50 flex"></div>
+    <!-- Popup -->
+    <div id="popup" class="fixed inset-0 hidden flex items-center justify-center bg-gray-800 bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <h2 class="text-xl font-semibold mb-4">Settings</h2>
+        <p class="mb-4">Settings popup here.</p>
+        <button id="closePopup" class="px-4 py-2 bg-red-500 text-white float-end rounded hover:bg-red-600">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>

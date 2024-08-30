@@ -63,7 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         break;
       case 'clear':
-        editor.doc.setValue('');
+        if (window.confirm("Are you sure you want to CLEAR the editor?")) {
+          editor.doc.setValue('');
+        }
 
         break;
       case 'validate':
@@ -77,6 +79,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Create an error pane
 
         break;
+      case 'settings':
+        // editor.doc.setValue('');
+        document.getElementById('popup').classList.remove('hidden');
+        break;
     }
   }))
 
@@ -85,4 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', elm.target.value);
   })
 
+});
+
+document.getElementById('closePopup').addEventListener('click', function() {
+  document.getElementById('popup').classList.add('hidden');
 });

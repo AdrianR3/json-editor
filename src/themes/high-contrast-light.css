@@ -1,0 +1,79 @@
+.cm-scroller {
+  overflow: auto;
+}
+
+.cm-wrap {
+  height: 100%;
+}
+
+.CodeMirror {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.cm-content {
+  caret-color: #3b4252;
+}
+
+.cm-focused .cm-cursor {
+  border-left-color: #3b4252;
+}
+
+.cm-focused .cm-selectionBackground,
+::selection {
+  background-color: #c0c3ca;
+}
+
+.cm-activeLine {
+  background-color: #eceff4;
+}
+
+.cm-searchMatch {
+  background-color: #507fe4;
+}
+
+.cm-gutters {
+  background-color: #eceff4;
+  color: #0c1418;
+}
+
+.cm-s-default .cm-keyword {
+  color: #c412ff;
+}
+
+.cm-s-default .cm-function {
+  color: #1c6ed4;
+}
+
+.cm-s-default .cm-variableName {
+  color: #ff450d;
+}
+
+.cm-s-default .cm-brace {
+  color: #000000;
+}
+
+.cm-s-default .cm-annotation {
+  color: #d30102;
+}
+
+.cm-s-default .cm-typeName {
+  color: #fcb600;
+}
+
+.cm-s-default .cm-className {
+  color: #f7c45d;
+}
+
+.cm-s-default .cm-operator,
+.cm-s-default .cm-operatorKeyword {
+  color: #2b9100;
+}
+
+.cm-s-default .cm-squareBracket {
+  color: #2d8584;
+}
+
+.cm-s-default .cm-angleBracket {
+  color: #00ffff;
+}
