@@ -126,6 +126,12 @@
           download
         </span>
       </button>
+      <button class="nav-button purple" name="publish">
+        Publish
+        <span class="material-symbols-outlined">
+          cloud
+        </span>
+      </button>
       <button class="nav-button red" name="clear">
         Clear
         <span class="material-symbols-outlined">
@@ -219,13 +225,31 @@
       </select>
     </div>
     <div id="editor" class="flex-1 bg-red-50 flex"></div>
-    <!-- Popup -->
+
     <div id="popup" class="fixed inset-0 hidden flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg shadow-lg w-80">
         <h2 class="text-xl font-semibold mb-4">Settings</h2>
         <p class="mb-4">Settings popup here.</p>
         <button id="closePopup" class="px-4 py-2 bg-red-500 text-white float-end rounded hover:bg-red-600">
           Close
+        </button>
+      </div>
+    </div>
+    <div id="notification" class="fixed inset-0 hidden flex items-center justify-center bg-gray-800 bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <h2 class="text-xl font-semibold mb-4">Notification</h2>
+        <!-- <p class="mb-4">Settings popup here.</p> -->
+        <button id="closePopup" class="px-4 py-2 bg-red-500 text-white float-end rounded hover:bg-red-600">
+          Close
+        </button>
+      </div>
+    </div>
+    <div id="error" class="fixed inset-0 hidden flex items-center justify-center bg-gray-800 bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-120">
+        <h2 class="text-xl font-semibold mb-4">Error</h2>
+        <p id="errorText" class="mb-4">An error occured.</p>
+        <button id="closeError" class="px-4 py-2 bg-red-500 text-white float-end rounded hover:bg-red-600">
+          Dismiss
         </button>
       </div>
     </div>

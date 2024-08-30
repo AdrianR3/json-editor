@@ -16,7 +16,6 @@ body,
 }
 
 #editor > div {
-  /* height: calc(100vh - 76px); */
   flex-grow: 1;
 }
 
@@ -102,7 +101,9 @@ body,
   @apply bg-red-500;
 }
 
-#app:has(#editor > div.CodeMirror.cm-s-dracula) > #nav {
+#app:has(#editor > div.CodeMirror.cm-s-3024-night) > #nav,
+#app:has(#editor > div.CodeMirror.cm-s-dracula) > #nav 
+{
   background-color: rgb(54, 54, 65);
   /* background-color: rgb(50, 50, 69); */
 }

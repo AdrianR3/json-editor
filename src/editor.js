@@ -72,7 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
           JSON.parse(editorContent);
         } catch (e) {
-          alert("JSON is invalid.")
+          document.getElementById('errorText').innerText = e;
+          document.getElementById('error').classList.remove('hidden');
           break;
         }
         alert("JSON is valid!")
@@ -82,6 +83,18 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'settings':
         // editor.doc.setValue('');
         document.getElementById('popup').classList.remove('hidden');
+        break;
+      case 'publish':
+        if (!window.confirm("Are you sure you want to publish this text?")) break;
+
+        uploadContent(editorContent).then((id) => {
+          console.log(`https://pastes.dev/${id}`)
+
+          alert(`https://pastes.dev/${id}`)
+
+          // document.getElementById('notification').innerHTML = `<a href="https://pastes.dev/${id}"></a>`;
+          // document.getElementById('notification').classList.remove('hidden');
+        })
         break;
     }
   }))
@@ -96,3 +109,44 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById('closePopup').addEventListener('click', function() {
   document.getElementById('popup').classList.add('hidden');
 });
+
+document.getElementById('closeError').addEventListener('click', function() {
+  document.getElementById('error').classList.add('hidden');
+});
+
+window.onbeforeunload = function() {
+  return "Changes may not be saved!";
+}
+
+async function uploadContent(content, language = 'json') {
+  try {
+    const response = await fetch('https://api.pastes.dev/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': `text/${language}`,
+      },
+      body: content
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const locationHeader = response.headers.get('Location');
+    if (locationHeader) {
+      const key = locationHeader.split('/').pop();
+      return key;
+    }
+
+    const responseBody = await response.json();
+    if (responseBody.key) {
+      return responseBody.key;
+    }
+
+    throw new Error('Paste key not found in response');
+  } catch (error) {
+    console.error('Error uploading content:', error);
+    return null;
+  }
+}
