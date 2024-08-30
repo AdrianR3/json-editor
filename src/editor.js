@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
     autoCloseBrackets: true,
     matchBrackets: true,
     allowMultipleSelections: true,
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
     extraKeys: {
+      "Command-K": (cm) => { cm.foldCode(cm.getCursor()); }
       // "F10": "autocomplete"
     }
   });
@@ -19,10 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('#nav > button.nav-button').forEach(button => button.addEventListener('click', (e) => {
     // e.stopPropagation()
     const button = e.currentTarget.getAttribute('name');
+    const editorContent = editor.doc.getValue();
     switch (button) {
       case 'export': 
         
-        let editorText = editor.doc.getValue().replace(/\n/g, "\r\n");
+        let editorText = editorContent.replace(/\n/g, "\r\n");
         let textFileAsBlob = new Blob([editorText], {type:'application/json'});
         
         const now = new Date();
@@ -47,21 +51,31 @@ document.addEventListener('DOMContentLoaded', function () {
   
         break;
       case 'beautify':
-
         editor.doc.setValue(
-          JSON.stringify(JSON.parse(editor.doc.getValue()), null, 2)
+          JSON.stringify(JSON.parse(editorContent), null, 2)
         );
 
         break;
       case 'minify':
-
         editor.doc.setValue(
-          JSON.stringify(JSON.parse(editor.doc.getValue()))
+          JSON.stringify(JSON.parse(editorContent))
         )
 
         break;
       case 'clear':
         editor.doc.setValue('');
+
+        break;
+      case 'validate':
+        try {
+          JSON.parse(editorContent);
+        } catch (e) {
+          alert("JSON is invalid.")
+          break;
+        }
+        alert("JSON is valid!")
+        // Create an error pane
+
         break;
     }
   }))
