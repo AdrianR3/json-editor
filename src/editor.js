@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     mode: 'application/json',
     theme: localStorage.getItem('theme') || '3024-night',
     lineNumbers: true,
-    value: `{}`,
+    value: localStorage.getItem('editorContent') || `{}`,
     autoCloseBrackets: true,
     matchBrackets: true,
     allowMultipleSelections: true,
@@ -16,6 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   editor.setSize("100%");
+
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+
+  if (params.has('id')) {
+    const pastesID = params.get('id');
+    console.log(`Parameter 'id' is present with value: ${pastesID}`);
+
+    readPaste(pastesID).then(data => {
+      editor.doc.setValue(data)
+    }).catch(error => {
+      document.getElementById('errorText').innerText = error;
+      document.getElementById('error').classList.remove('hidden');
+    });
+  }
 
   console.log(editor.doc.getValue())
 
@@ -87,14 +102,23 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'publish':
         if (!window.confirm("Are you sure you want to publish this text?")) break;
 
-        uploadContent(editorContent).then((id) => {
-          console.log(`https://pastes.dev/${id}`)
+        // uploadContent(editorContent).then((id) => {
+        //   console.log(`https://pastes.dev/${id}`)
 
-          alert(`https://pastes.dev/${id}`)
+        //   if ('URLSearchParams' in window) {
+        //     const url = new URL(window.location)
+        //     url.searchParams.set("id", id)
+        //     history.pushState(null, '', url);
+        //   }
 
-          // document.getElementById('notification').innerHTML = `<a href="https://pastes.dev/${id}"></a>`;
-          // document.getElementById('notification').classList.remove('hidden');
-        })
+        //   alert(`https://pastes.dev/${id}`)
+
+        //   // document.getElementById('notification').innerHTML = `<a href="https://pastes.dev/${id}"></a>`;
+        //   // document.getElementById('notification').classList.remove('hidden');
+        // }).catch(error => {
+        //   document.getElementById('errorText').innerText = error;
+        //   document.getElementById('error').classList.remove('hidden');
+        // })
         break;
     }
   }))
@@ -135,6 +159,7 @@ async function uploadContent(content, language = 'json') {
 
     const locationHeader = response.headers.get('Location');
     if (locationHeader) {
+      console.log(`locationHeader: ${locationHeader}`)
       const key = locationHeader.split('/').pop();
       return key;
     }
@@ -148,5 +173,44 @@ async function uploadContent(content, language = 'json') {
   } catch (error) {
     console.error('Error uploading content:', error);
     return null;
+  }
+}
+
+async function readPaste(key) {
+  if (!/^[a-zA-Z0-9]+$/.test(key)) {
+    console.error('Invalid paste key: Key must be alphanumeric');
+    return null;
+  }
+  
+  try {
+
+    const response = await fetch(`https://api.pastes.dev/${key}`);
+      // .then(response => response.text())
+      // .then(data => {return `{"test":"debug"}`});
+
+
+    // var response = await fetch(`https://api.pastes.dev/${key}`, {
+    //   method: 'GET'
+    // });
+    if (!response.ok) throw new Error(`Error fetching from pastes.dev! (https://api.pastes.dev/${key}) Status: ${response.status}`);
+
+    // console.log(`response.headers: ${JSON.stringify(await response.headers)}`)
+    // console.log(response.headers)
+
+    // const contentType = response.headers.get('Content-Type');
+    // if (!contentType) throw new Error('Content-Type header missing');
+    
+    // const languageMatch = contentType.match(/^text\/(.+)$/);
+    // if (!languageMatch) throw new Error('Invalid Content-Type format');
+    
+    // const language = languageMatch[1];
+    // const content = await response;
+    // console.log({ content /*, language */})
+    const data = await response.text();
+
+    return data;
+  } catch (error) {
+      console.error('Error reading paste:', error);
+      return null;
   }
 }
