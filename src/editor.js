@@ -125,6 +125,10 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', elm.target.value);
   })
 
+  document.querySelectorAll('.setting-option').forEach((setting) => {
+    setting.addEventListener('change', (elm) => handleSetting(setting.id, elm.target.value))
+  })
+
 });
 
 document.getElementById('closePopup').addEventListener('click', function() {
@@ -222,9 +226,28 @@ async function readPaste(key) {
   }
 }
 
+function handleSetting(elm, value) {
+  switch (elm.slice(0, -7)) {
+    case 'lineWrap':
+      console.log(value)
+      break;
+    case 'fontSize':
+      console.log(value)
+      break;
+    case 'indentation':
+      console.log(value)
+      break;
+  }
+  console.log(`value: ${value}`)
+}
+
 function autosave(editor) {
   console.info("Autosaving...")
   const editorContent = editor.doc.getValue();
 
   localStorage.setItem('editorContent', editorContent)
+}
+
+function getSetting(settingName) {
+  return document.getElementById(`${settingName}Setting`).value;
 }

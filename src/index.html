@@ -18,6 +18,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"></noscript>
   <!-- CodeMirror -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/dialog/dialog.css">
 
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/dracula.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/3024-night.min.css">
@@ -232,13 +233,13 @@
         <p class="mb-4">Editor Settings</p>
 
         <div class="mb-4 flex items-center">
-          <input type="checkbox" id="lineWrapSetting" class="mr-2 h-4 w-4" />
+          <input type="checkbox" id="lineWrapSetting" class="setting-option mr-2 h-4 w-4" />
           <label for="lineWrapSetting" class="text-sm">Enable Line Wrapping</label>
         </div>
         
         <div class="mb-4">
           <label for="fontSizeSetting" class="block text-sm mb-1">Font Size</label>
-          <select id="fontSizeSetting" class="w-full p-2 border border-gray-300 rounded">
+          <select id="fontSizeSetting" class="setting-option w-full p-2 border border-gray-300 rounded">
             <option value="text-sm">Small</option>
             <option value="text-base" selected>Medium</option>
             <option value="text-lg">Large</option>
@@ -248,7 +249,7 @@
 
         <div class="mb-4">
           <label for="indentationSetting" class="block text-sm mb-1">Indentation</label>
-          <select id="indentationSetting" class="w-full p-2 border border-gray-300 rounded">
+          <select id="indentationSetting" class="setting-option w-full p-2 border border-gray-300 rounded" disabled>
             <option value="2">2 Spaces</option>
             <option value="4" selected>4 Spaces</option>
             <option value="tab">Tab</option>
@@ -290,6 +291,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/fold/foldgutter.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/fold/brace-fold.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/show-hint.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/dialog/dialog.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/search/searchcursor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/search/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/scroll/annotatescrollbar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/search/matchesonscrollbar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/search/jump-to-line.js"></script>
   <script src="./editor.js"></script>
 </body>
 </html>
