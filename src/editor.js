@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     lineWrapping: localStorage.getItem('lineWrapping') || false,
     autoCloseBrackets: true,
     matchBrackets: true,
-    // allowMultipleSelections: true,
+    allowMultipleSelections: true,
     foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers", ],
+    gutters: ["CodeMirror-lint-markers", "CodeMirror-linenumbers", "CodeMirror-foldgutter" ],
     extraKeys: {
       "Command-K": (cm) => { cm.foldCode(cm.getCursor()); },
-      // "F10": "autocomplete"
+      "F10": "autocomplete"
     },
     lint: true
   });
@@ -36,10 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }).catch(error => displayError(error));
   }
 
-  console.log(editor.doc.getValue())
-
   document.querySelectorAll('#nav > button.nav-button').forEach(button => button.addEventListener('click', (e) => {
-    // e.stopPropagation()
     const button = e.currentTarget.getAttribute('name');
     const editorContent = editor.doc.getValue();
     switch (button) {
@@ -95,11 +92,9 @@ document.addEventListener('DOMContentLoaded', function () {
           break;
         }
         alert("JSON is valid!")
-        // Create an error pane
 
         break;
       case 'settings':
-        // editor.doc.setValue('');
         document.getElementById('popup').classList.remove('hidden');
         break;
       case 'publish':
@@ -114,10 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
             history.pushState(null, '', url);
           }
 
-          alert(`https://pastes.dev/${id}`)
+          // alert(`https://pastes.dev/${id}`)
 
-          // document.getElementById('notification').innerHTML = `<a href="https://pastes.dev/${id}"></a>`;
-          // document.getElementById('notification').classList.remove('hidden');
+          // `<a href="https://pastes.dev/${id}"></a>`;
+          // classList.remove('hidden');
+          displayNotification(`<a href="https://pastes.dev/${id}"></a>`)
+          // displayNotification(`https://pastes.dev/${id}`);
         }).catch(error => displayError(error));
   
         break;
@@ -130,11 +127,26 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   document.querySelectorAll('.setting-option').forEach((setting) => {
-    setting.addEventListener('change', (elm) => handleSetting(setting.id, elm.target.value))
+    setting.addEventListener('change', (elm) => {
+      handleSetting(setting.id, elm.target.value)
+      localStorage.setItem(setting.id, elm.target.value)
+    })
+  })
+
+  // Set initial font size setting
+  document.getElementById('lineWrapSetting').checked = (localStorage.getItem('lineWrapping') || false) != 'false';
+  document.getElementById('fontSizeSetting').value = localStorage.getItem('fontSizeSetting') || 'fs-base';
+  handleSetting('fontSizeSetting')
+
+  document.querySelectorAll('.setting-option').forEach((setting) => {
+    // setting.value = localStorage.getItem(setting.id)
+    // setting.checked = localStorage.getItem(setting.id)
   })
 
   document.getElementById('lineWrapSetting').addEventListener('change', function() {
     let shouldWrap = this.checked;
+
+    console.log(shouldWrap) // Debug
 
     localStorage.setItem('lineWrapping', shouldWrap)
     editor.setOption('lineWrapping', shouldWrap);
@@ -151,19 +163,17 @@ document.getElementById('closeError').addEventListener('click', function() {
 });
 
 window.onbeforeunload = function() {
-
-  // Actually broken
-  // const editor = EditorView.findFromDOM(); 
-  // console.debug(`editor.doc.getValue(): ${console.info(editor.doc.getValue())}`)
-  // console.debug(`localStorage.getItem('editorContent'): ${localStorage.getItem('editorContent')}`)
-
-  // if (editor.doc.getValue() != localStorage.getItem('editorContent')) 
   return "Changes may not be saved!";
 }
 
 function displayError(error) {
   document.getElementById('errorText').innerText = error;
   document.getElementById('error').classList.remove('hidden');
+}
+
+function displayNotification(htmlContent) {
+  document.getElementById('notification').innerHTML = htmlContent;
+  document.getElementById('notification').classList.remove('hidden');
 }
 
 async function uploadContent(content, language = 'json') {
@@ -210,18 +220,6 @@ async function readPaste(key) {
 
     if (!response.ok) throw new Error(`Error fetching from pastes.dev! (https://api.pastes.dev/${key}) Status: ${response.status}`);
 
-    // console.log(`response.headers: ${JSON.stringify(await response.headers)}`)
-    // console.log(response.headers)
-
-    // const contentType = response.headers.get('Content-Type');
-    // if (!contentType) throw new Error('Content-Type header missing');
-    
-    // const languageMatch = contentType.match(/^text\/(.+)$/);
-    // if (!languageMatch) throw new Error('Invalid Content-Type format');
-    
-    // const language = languageMatch[1];
-    // const content = await response;
-    // console.log({ content /*, language */})
     const data = await response.text();
 
     return data;
@@ -247,7 +245,6 @@ function handleSetting(elm, value) {
       console.log(value)
       break;
   }
-
 }
 
 function autosave(editor) {
