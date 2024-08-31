@@ -94,7 +94,7 @@
 </head>
 <body>
   <div id="app" class="flex flex-col">
-    <div id="nav" class="flex flex-wrap p-4 gap-y-2 bg-orange-600 text-white">
+    <div id="nav" class="flex flex-wrap p-4 gap-y-2 text-white">
       <div class="text-xl font-bold p-2">
         <span>SimpleJSON Editor</span>
       </div>
@@ -121,6 +121,12 @@
         Save
         <span class="material-symbols-outlined">
           download
+        </span>
+      </button>
+      <button class="nav-button orange" name="open">
+        Open
+        <span class="material-symbols-outlined">
+          upload
         </span>
       </button>
       <button class="nav-button purple" name="publish">
@@ -259,10 +265,12 @@
       </div>
     </div>
     <div id="notification" class="fixed inset-0 hidden flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-auto max-w-120">
         <h2 class="text-xl font-semibold mb-4">Notification</h2>
-        <!-- <p class="mb-4">Settings popup here.</p> -->
-        <button id="closePopup" class="px-4 py-2 bg-red-500 text-white float-end rounded hover:bg-red-600">
+        <div id="notificationContent">
+          test
+        </div>
+        <button id="dismissNotification" class="px-4 py-2 mt-4 bg-red-500 text-white float-end rounded hover:bg-red-600">
           Close
         </button>
       </div>

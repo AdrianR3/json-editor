@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   CodeMirror.commands.autocomplete = (cm) => doAutocomplete(cm);
 
+  // Initialize CodeMirror editor
   var editor = CodeMirror(document.getElementById('editor'), {
     mode: 'application/json',
     theme: localStorage.getItem('theme') || 'dracula',
@@ -29,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (params.has('id')) {
     const pastesID = params.get('id');
-    console.log(`Parameter 'id' is present with value: ${pastesID}`);
 
     readPaste(pastesID).then(data => {
       editor.doc.setValue(data)
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const editorContent = editor.doc.getValue();
     switch (button) {
       case 'export': 
+        // Save file to computer
         
         let editorText = editorContent.replace(/\n/g, "\r\n");
         let textFileAsBlob = new Blob([editorText], {type:'application/json'});
@@ -66,25 +67,61 @@ document.addEventListener('DOMContentLoaded', function () {
         }
   
         break;
+      case 'open':
+        // Open file from computer
+
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'text/*,.json'
+        // fileInput.accept = '.json, .txt, .csv, .xml, .html, .pdf';
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+
+              reader.onload = (e) => {
+                editor.doc.setValue(e.target.result);
+              };
+
+              reader.onerror = () => {
+                displayError('Error reading file');
+              };
+
+              reader.readAsText(file);
+            }
+        });
+
+        fileInput.click();
+
+        break;
       case 'beautify':
+        // Format JSON
+
         editor.doc.setValue(
           JSON.stringify(JSON.parse(editorContent), null, 2)
         );
 
         break;
       case 'minify':
+        // Condense JSON
+
         editor.doc.setValue(
           JSON.stringify(JSON.parse(editorContent))
         )
 
         break;
       case 'clear':
+        // Reset Editor
+
         if (window.confirm("Are you sure you want to CLEAR the editor?")) {
           editor.doc.setValue('');
         }
 
         break;
       case 'validate':
+        // Check JSON for syntax errors
+
         try {
           JSON.parse(editorContent);
         } catch (e) {
@@ -95,10 +132,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         break;
       case 'settings':
+        // Open settings window
+
         document.getElementById('popup').classList.remove('hidden');
         break;
       case 'publish':
-        if (!window.confirm("Are you sure you want to publish this text?")) break;
+        // Publish text to pastes.dev
+
+        if (!window.confirm("Are you sure you want to make this text public?")) break;
 
         uploadContent(editorContent).then((id) => {
           console.log(`https://pastes.dev/${id}`)
@@ -109,12 +150,11 @@ document.addEventListener('DOMContentLoaded', function () {
             history.pushState(null, '', url);
           }
 
-          // alert(`https://pastes.dev/${id}`)
+          displayNotification(`
+            SimpleJSON Link: <a href="${window.location.href}" target="_blank" class="mb-2">${window.location.href}</a><br>
+            pastes.dev: <a href="https://pastes.dev/${id}" target="_blank" class="mb-2">https://pastes.dev/${id}</a>
+          `)
 
-          // `<a href="https://pastes.dev/${id}"></a>`;
-          // classList.remove('hidden');
-          displayNotification(`<a href="https://pastes.dev/${id}"></a>`)
-          // displayNotification(`https://pastes.dev/${id}`);
         }).catch(error => displayError(error));
   
         break;
@@ -136,13 +176,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // Set initial font size setting
   document.getElementById('lineWrapSetting').checked = (localStorage.getItem('lineWrapping') || false) != 'false';
   document.getElementById('fontSizeSetting').value = localStorage.getItem('fontSizeSetting') || 'fs-base';
-  handleSetting('fontSizeSetting')
+  handleSetting('fontSizeSetting', document.getElementById('fontSizeSetting').value)
 
   document.querySelectorAll('.setting-option').forEach((setting) => {
     // setting.value = localStorage.getItem(setting.id)
     // setting.checked = localStorage.getItem(setting.id)
   })
 
+  // Set initial line wrap setting
   document.getElementById('lineWrapSetting').addEventListener('change', function() {
     let shouldWrap = this.checked;
 
@@ -158,24 +199,32 @@ document.getElementById('closePopup').addEventListener('click', function() {
   document.getElementById('popup').classList.add('hidden');
 });
 
+document.getElementById('dismissNotification').addEventListener('click', function() {
+  document.getElementById('notification').classList.add('hidden');
+});
+
 document.getElementById('closeError').addEventListener('click', function() {
   document.getElementById('error').classList.add('hidden');
 });
 
+// Prevent instant reloads (prompt before reload)
 window.onbeforeunload = function() {
   return "Changes may not be saved!";
 }
 
+// Shows an error popup to the user
 function displayError(error) {
   document.getElementById('errorText').innerText = error;
   document.getElementById('error').classList.remove('hidden');
 }
 
+// Shows a notification popup to the user
 function displayNotification(htmlContent) {
-  document.getElementById('notification').innerHTML = htmlContent;
+  document.getElementById('notificationContent').innerHTML = htmlContent;
   document.getElementById('notification').classList.remove('hidden');
 }
 
+// Uploads `content` as JSON to pastes.dev
 async function uploadContent(content, language = 'json') {
   try {
     const response = await fetch('https://api.pastes.dev/post', {
@@ -209,6 +258,7 @@ async function uploadContent(content, language = 'json') {
   }
 }
 
+// Requests text from pastes.dev by its id (pastes.dev/:id)
 async function readPaste(key) {
   if (!/^[a-zA-Z0-9]+$/.test(key)) {
     console.error('Invalid paste key: Key must be alphanumeric');
@@ -230,8 +280,6 @@ async function readPaste(key) {
 }
 
 function handleSetting(elm, value) {
-  console.log(`value: ${value}`)
-
   switch (elm.slice(0, -7)) {
     case 'lineWrap':
       console.log(value)
@@ -247,8 +295,8 @@ function handleSetting(elm, value) {
   }
 }
 
+// Automatically save editor contents to localStorage
 function autosave(editor) {
-  console.info("Autosaving...")
   const editorContent = editor.doc.getValue();
 
   localStorage.setItem('editorContent', editorContent)
