@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     lineWrapping: localStorage.getItem('lineWrapping') || false,
     autoCloseBrackets: true,
     matchBrackets: true,
-    allowMultipleSelections: true,
+    // allowMultipleSelections: true,
     foldGutter: true,
     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers", ],
     extraKeys: {
       "Command-K": (cm) => { cm.foldCode(cm.getCursor()); },
-      "F10": "autocomplete"
+      // "F10": "autocomplete"
     },
     lint: true
   });
@@ -153,9 +153,7 @@ document.getElementById('closeError').addEventListener('click', function() {
 window.onbeforeunload = function() {
 
   // Actually broken
-
   // const editor = EditorView.findFromDOM(); 
-
   // console.debug(`editor.doc.getValue(): ${console.info(editor.doc.getValue())}`)
   // console.debug(`localStorage.getItem('editorContent'): ${localStorage.getItem('editorContent')}`)
 
@@ -174,7 +172,6 @@ async function uploadContent(content, language = 'json') {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-        // 'Content-Type': `text/${language}`,
       },
       body: content
     });
@@ -210,13 +207,7 @@ async function readPaste(key) {
   
   try {
     const response = await fetch(`https://api.pastes.dev/${key}`);
-      // .then(response => response.text())
-      // .then(data => {return `{"test":"debug"}`});
 
-
-    // var response = await fetch(`https://api.pastes.dev/${key}`, {
-    //   method: 'GET'
-    // });
     if (!response.ok) throw new Error(`Error fetching from pastes.dev! (https://api.pastes.dev/${key}) Status: ${response.status}`);
 
     // console.log(`response.headers: ${JSON.stringify(await response.headers)}`)
@@ -241,18 +232,22 @@ async function readPaste(key) {
 }
 
 function handleSetting(elm, value) {
+  console.log(`value: ${value}`)
+
   switch (elm.slice(0, -7)) {
     case 'lineWrap':
       console.log(value)
       break;
     case 'fontSize':
-      console.log(value)
+      document.getElementById('app').classList.remove('fs-sm', 'fs-base', 'fs-lg', 'fs-xl')
+      document.getElementById('app').classList.add(value)
+
       break;
     case 'indentation':
       console.log(value)
       break;
   }
-  console.log(`value: ${value}`)
+
 }
 
 function autosave(editor) {

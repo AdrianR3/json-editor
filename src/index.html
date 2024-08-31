@@ -20,23 +20,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/dialog/dialog.css">
 
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/dracula.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/3024-night.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/neo.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/theme/moxer.min.css"> -->
-
   <!-- CodeMirror Extensions -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/show-hint.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/fold/foldgutter.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/lint.css">
-
-  <script src="https://unpkg.com/jshint@2.13.2/dist/jshint.js"></script>
-  <script src="https://unpkg.com/jsonlint@1.6.3/web/jsonlint.js"></script>
-  <script src="https://unpkg.com/csslint@1.0.5/dist/csslint.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/lint.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/javascript-lint.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/json-lint.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/css-lint.js"></script>
 
   <!-- All Themes -->
   <link rel="stylesheet" href="./themes/high-contrast-light.css">
@@ -249,10 +236,11 @@
         <div class="mb-4">
           <label for="fontSizeSetting" class="block text-sm mb-1">Font Size</label>
           <select id="fontSizeSetting" class="setting-option w-full p-2 border border-gray-300 rounded">
-            <option value="text-sm">Small</option>
-            <option value="text-base" selected>Medium</option>
-            <option value="text-lg">Large</option>
-            <option value="text-xl">Extra Large</option>
+            <option value="fs-sm">Small</option>
+            <option value="fs-base" selected>Medium</option>
+            <option value="fs-lg">Large</option>
+            <option value="fs-xl">Extra Large</option>
+            <option value="fs-2xl">Extra Extra Large</option>
           </select>
         </div>
 
@@ -309,19 +297,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/search/jump-to-line.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/lint.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/json-lint.min.js"></script>
 
   <!-- Test -->
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/lint.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/json-lint.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/show-hint.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/json-hint.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/lint.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/lint/json-lint.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/show-hint.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/hint/json-hint.min.js"></script> -->
 
+  <!-- <script src="https://unpkg.com/jshint@2.13.2/dist/jshint.js"></script> -->
+  <!-- <script src="https://unpkg.com/jsonlint@1.6.3/web/jsonlint.js"></script> -->
+  <!-- <script src="https://unpkg.com/csslint@1.0.5/dist/csslint.js"></script> -->
 
-  <script defer src="./editor.js"></script>
+  <script src="./editor.js"></script>
 </body>
 </html>
