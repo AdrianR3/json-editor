@@ -1,18 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
+  CodeMirror.commands.autocomplete = (cm) => doAutocomplete(cm);
+
   var editor = CodeMirror(document.getElementById('editor'), {
     mode: 'application/json',
-    theme: localStorage.getItem('theme') || '3024-night',
+    theme: localStorage.getItem('theme') || 'dracula',
     lineNumbers: true,
     value: localStorage.getItem('editorContent') || `{}`,
+    lineWrapping: localStorage.getItem('lineWrapping') || false,
     autoCloseBrackets: true,
     matchBrackets: true,
     allowMultipleSelections: true,
     foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter", "CodeMirror-lint-markers", ],
     extraKeys: {
-      "Command-K": (cm) => { cm.foldCode(cm.getCursor()); }
-      // "F10": "autocomplete"
-    }
+      "Command-K": (cm) => { cm.foldCode(cm.getCursor()); },
+      "F10": "autocomplete"
+    },
+    lint: true
   });
 
   // Autosave
@@ -129,6 +133,13 @@ document.addEventListener('DOMContentLoaded', function () {
     setting.addEventListener('change', (elm) => handleSetting(setting.id, elm.target.value))
   })
 
+  document.getElementById('lineWrapSetting').addEventListener('change', function() {
+    let shouldWrap = this.checked;
+
+    localStorage.setItem('lineWrapping', shouldWrap)
+    editor.setOption('lineWrapping', shouldWrap);
+  });
+
 });
 
 document.getElementById('closePopup').addEventListener('click', function() {
@@ -140,13 +151,16 @@ document.getElementById('closeError').addEventListener('click', function() {
 });
 
 window.onbeforeunload = function() {
-  const editor = EditorView.findFromDOM();
 
-  console.debug(`editor.doc.getValue(): ${console.info(editor.doc.getValue())}`)
-  console.debug(`localStorage.getItem('editorContent'): ${localStorage.getItem('editorContent')}`)
+  // Actually broken
 
-  if (editor.doc.getValue() != localStorage.getItem('editorContent')) 
-    return "Changes may not be saved!";
+  // const editor = EditorView.findFromDOM(); 
+
+  // console.debug(`editor.doc.getValue(): ${console.info(editor.doc.getValue())}`)
+  // console.debug(`localStorage.getItem('editorContent'): ${localStorage.getItem('editorContent')}`)
+
+  // if (editor.doc.getValue() != localStorage.getItem('editorContent')) 
+  return "Changes may not be saved!";
 }
 
 function displayError(error) {
@@ -250,4 +264,10 @@ function autosave(editor) {
 
 function getSetting(settingName) {
   return document.getElementById(`${settingName}Setting`).value;
+}
+
+function doAutocomplete(cm) {
+  cm.showHint({ 
+    hint: CodeMirror.hint.json 
+  });
 }
