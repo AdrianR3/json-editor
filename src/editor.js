@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // Autosave
+  setInterval(() => autosave(editor), 5000);
+
   editor.setSize("100%");
 
   const url = new URL(window.location.href);
@@ -26,10 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     readPaste(pastesID).then(data => {
       editor.doc.setValue(data)
-    }).catch(error => {
-      document.getElementById('errorText').innerText = error;
-      document.getElementById('error').classList.remove('hidden');
-    });
+    }).catch(error => displayError(error));
   }
 
   console.log(editor.doc.getValue())
@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
           JSON.parse(editorContent);
         } catch (e) {
-          document.getElementById('errorText').innerText = e;
-          document.getElementById('error').classList.remove('hidden');
+          displayError(e)
           break;
         }
         alert("JSON is valid!")
@@ -102,23 +101,21 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'publish':
         if (!window.confirm("Are you sure you want to publish this text?")) break;
 
-        // uploadContent(editorContent).then((id) => {
-        //   console.log(`https://pastes.dev/${id}`)
+        uploadContent(editorContent).then((id) => {
+          console.log(`https://pastes.dev/${id}`)
 
-        //   if ('URLSearchParams' in window) {
-        //     const url = new URL(window.location)
-        //     url.searchParams.set("id", id)
-        //     history.pushState(null, '', url);
-        //   }
+          if ('URLSearchParams' in window) {
+            const url = new URL(window.location)
+            url.searchParams.set("id", id)
+            history.pushState(null, '', url);
+          }
 
-        //   alert(`https://pastes.dev/${id}`)
+          alert(`https://pastes.dev/${id}`)
 
-        //   // document.getElementById('notification').innerHTML = `<a href="https://pastes.dev/${id}"></a>`;
-        //   // document.getElementById('notification').classList.remove('hidden');
-        // }).catch(error => {
-        //   document.getElementById('errorText').innerText = error;
-        //   document.getElementById('error').classList.remove('hidden');
-        // })
+          // document.getElementById('notification').innerHTML = `<a href="https://pastes.dev/${id}"></a>`;
+          // document.getElementById('notification').classList.remove('hidden');
+        }).catch(error => displayError(error));
+  
         break;
     }
   }))
@@ -139,7 +136,18 @@ document.getElementById('closeError').addEventListener('click', function() {
 });
 
 window.onbeforeunload = function() {
-  return "Changes may not be saved!";
+  const editor = EditorView.findFromDOM();
+
+  console.debug(`editor.doc.getValue(): ${console.info(editor.doc.getValue())}`)
+  console.debug(`localStorage.getItem('editorContent'): ${localStorage.getItem('editorContent')}`)
+
+  if (editor.doc.getValue() != localStorage.getItem('editorContent')) 
+    return "Changes may not be saved!";
+}
+
+function displayError(error) {
+  document.getElementById('errorText').innerText = error;
+  document.getElementById('error').classList.remove('hidden');
 }
 
 async function uploadContent(content, language = 'json') {
@@ -183,7 +191,6 @@ async function readPaste(key) {
   }
   
   try {
-
     const response = await fetch(`https://api.pastes.dev/${key}`);
       // .then(response => response.text())
       // .then(data => {return `{"test":"debug"}`});
@@ -213,4 +220,11 @@ async function readPaste(key) {
       console.error('Error reading paste:', error);
       return null;
   }
+}
+
+function autosave(editor) {
+  console.info("Autosaving...")
+  const editorContent = editor.doc.getValue();
+
+  localStorage.setItem('editorContent', editorContent)
 }

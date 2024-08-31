@@ -229,7 +229,23 @@
     <div id="popup" class="fixed inset-0 hidden flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg shadow-lg w-80">
         <h2 class="text-xl font-semibold mb-4">Settings</h2>
-        <p class="mb-4">Settings popup here.</p>
+        <p class="mb-4">Editor Settings</p>
+
+        <div class="mb-4 flex items-center">
+          <input type="checkbox" id="lineWrapSetting" class="mr-2 h-4 w-4" />
+          <label for="lineWrapSetting" class="text-sm">Enable Line Wrapping</label>
+        </div>
+        
+        <div class="mb-4">
+          <label for="fontSizeSetting" class="block text-sm mb-1">Font Size</label>
+          <select id="fontSizeSetting" class="w-full p-2 border border-gray-300 rounded">
+            <option value="text-sm">Small</option>
+            <option value="text-base" selected>Medium</option>
+            <option value="text-lg">Large</option>
+            <option value="text-xl">Extra Large</option>
+          </select>
+        </div>
+
         <button id="closePopup" class="px-4 py-2 bg-red-500 text-white float-end rounded hover:bg-red-600">
           Close
         </button>
@@ -255,11 +271,11 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/codemirror.min.js"></script>
+  <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/mode/javascript/javascript.min.js"></script>
 
   <!-- Extensions -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/edit/closebrackets.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/edit/closebrackets.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/edit/matchbrackets.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/fold/foldcode.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.8/addon/fold/foldgutter.js"></script>
