@@ -298,7 +298,6 @@ function handleSetting(elm, value) {
 // Automatically save editor contents to localStorage
 function autosave(editor) {
   const editorContent = editor.doc.getValue();
-
   localStorage.setItem('editorContent', editorContent)
 }
 

@@ -985,7 +985,7 @@ a:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
   /* background-color: rgb(54, 54, 65); */
-  background-color: rgb(50, 50, 69);
+  background-color: rgb(19, 19, 22);
 }
 
 #app:has(#editor > div.CodeMirror.cm-s-dracula) > #nav {
@@ -994,6 +994,28 @@ a:hover {
 
 #app:has(#editor > div.CodeMirror.cm-s-bespin) > #nav {
   background-color: rgb(60, 44, 25);
+}
+
+#app:has(#editor > div.CodeMirror.cm-s-neo) > #nav {
+  background-color: rgb(225, 227, 232);
+  color: rgb(42, 42, 42);
+}
+
+#app:has(#editor > div.CodeMirror.cm-s-neo) .nav-button.white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+#app:has(#editor > div.CodeMirror.cm-s-neo) .nav-button.white:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+#app:has(#editor > div.CodeMirror.cm-s-neo) .nav-button.white {
+  background-color: rgb(179, 188, 202);
+  color: rgb(24, 27, 33);
 }
 
 #app.fs-sm .CodeMirror {
