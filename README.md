@@ -22,7 +22,7 @@ Supported functions are as follows:
 
 ## Settings
 
-Available settings are:
+Available settings are as follows:
 
  - Editor Theme
  - Font Size
